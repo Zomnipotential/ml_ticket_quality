@@ -1,0 +1,23 @@
+[
+  {
+    "ticket_id": "T-9001",
+    "created_at": "2025-03-11T08:43:15+01:00",
+    "channel": "email",
+    "lang_hint": "sv",
+    "body": "Hej! Får felkod 504 när jag exporterar fakturor från Malmö-kontoret. Kundnr 77821."
+  },
+  {
+    "ticket_id": "T-9018",
+    "created_at": "2025-03-11T20:12:04+01:00",
+    "channel": "chat",
+    "lang_hint": "en",
+    "body": "My SSN is [REDACTED SSN] and phone [REDACTED PHONE]."
+  },
+  {
+    "ticket_id": "T-9055",
+    "created_at": "2025-03-12T09:55:01+01:00",
+    "channel": "web",
+    "lang_hint": "sv-SE",
+    "body": "Får jag dubbletter när jag synkar? Händer bara på fredagar..."
+  }
+]
