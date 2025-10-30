@@ -14,10 +14,10 @@ from pathlib import Path
 
 # Load raw text input
 with open("data/snippet.txt", "r", encoding="utf-8") as f:
-    raw_text = f.read()
+    snippet = f.read()
 
 # Parse and structure ticket data
-tickets = parse_tickets(raw_text)
+tickets = parse_tickets(snippet)
 
 # Extract entities, compute scores, redact bodies
 for ticket in tickets:
@@ -31,8 +31,24 @@ Path("output").mkdir(exist_ok=True)
 with open("output/ticket_report_with_scores.json", "w", encoding="utf-8") as f:
     json.dump(tickets, f, indent=2, ensure_ascii=False)
 
+# Create a clean redacted version with minimal fields and redacted body
+redacted_version = []
+
+for ticket in tickets:
+    redacted_version.append({
+        "ticket_id": ticket["ticket_id"],
+        "created_at": ticket["created_at"],
+        "channel": ticket["channel"],
+        "lang_hint": ticket["lang_hint"],
+        "body": ticket["body_redacted"],
+    })
+
+# Save redacted version
 with open("output/ticket_report_redacted.json", "w", encoding="utf-8") as f:
-    json.dump(tickets, f, indent=2, ensure_ascii=False)
+    json.dump(redacted_version, f, indent=2, ensure_ascii=False)
+
+# with open("output/ticket_report_redacted.json", "w", encoding="utf-8") as f:
+#     json.dump(tickets, f, indent=2, ensure_ascii=False)
 
 # Optional: print redacted output for control
 print("\n=== Redacted Ticket Bodies ===\n")
