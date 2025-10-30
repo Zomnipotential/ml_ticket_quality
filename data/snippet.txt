@@ -1,0 +1,27 @@
+﻿ticket_id created_at channe
+l
+lang_hint body
+
+T-9001 2025-03-11T08:43:15+
+
+01:00
+
+email sv 'Hej! Får felkod 504 när jag exporterar
+fakturor från Malmö-kontoret. Kundnr
+77821.'
+
+T-9018 2025-03-11T20:12:04+
+
+01:00
+
+chat en 'My SSN is 850709-1234 and phone +46
+
+70 123 45 67.'
+
+T-9055 2025-03-12T09:55:01+
+
+01:00
+
+web sv-SE 'Får jag dubbletter när jag synkar?
+Händer bara på fredagar...'
+
