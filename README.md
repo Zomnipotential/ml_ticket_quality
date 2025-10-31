@@ -5,9 +5,6 @@
 1. **A Python script that processes the tickets and generates JSON reports.**
 2. **A Java Spring Boot application that serves the processed data via a REST endpoint.**
 
-
-**Sure! Here’s a clear and concise **summary section** you can add to the very top of your **README.md**. It gives a step-by-step overview of what to run and in what order — like a quick-start guide.**
-
 ## Summary
 
 1. **Activate the Python virtual environment from inside ml_ticket_quality**
@@ -26,7 +23,7 @@ This will generate ticket reports, redact sensitive data, and copy the scored re
 
 4. **Start the Spring Boot server**
 
-% mvn spring-boot:run
+% mvn spring-boot:runy
 
 5. **Access the API**
    **Open a browser or tool like Postman and go to:**
@@ -51,7 +48,7 @@ This returns the structured ticket report as JSON.
 
 ## 2. Running the Python Script
 
-1. **Activate your Python virtual environment.**
+1. **Activate a Python virtual environment.**
 
 % source .venv/bin/activate
 
@@ -79,7 +76,7 @@ output/ticket_report_redacted.json
 
 ../java_quality_project/src/main/resources/quality_report.json
 
-**If your Java project has a different path, update this destination inside **main.py**.**
+**If the Java project has a different path, update this destination inside **main.py**.**
 
 ## 3. Running the Java REST API
 
@@ -92,7 +89,7 @@ src/main/resources
 
 % mvn spring-boot:run
 
-4. **Once running, open your browser or API testing tool and go to:**
+4. **Once running, open the browser or API testing tool and go to:**
 
 http://localhost:8080/v1/quality/summary
 
@@ -110,7 +107,7 @@ output/ticket_report_with_scores.json
 
 src/main/resources/quality_report.json
 
-**This way, the Java backend always serves the most recent ticket data. No manual steps are required unless your folder names differ.**
+**This way, the Java backend always serves the most recent ticket data. No manual steps are required unless the folder names differ.**
 
 ## 5. Privacy and Redaction
 
