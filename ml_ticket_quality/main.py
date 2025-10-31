@@ -12,6 +12,9 @@ from src.redact import redact_pii
 import json
 from pathlib import Path
 
+import shutil
+import os
+
 # Load raw text input
 with open("data/snippet.txt", "r", encoding="utf-8") as f:
     snippet = f.read()
@@ -55,3 +58,18 @@ print("\n=== Redacted Ticket Bodies ===\n")
 for ticket in tickets:
     print(f"{ticket['ticket_id']}:\n{ticket['body_redacted']}\n{'-'*60}")
 
+
+
+# Define paths
+src = "output/ticket_report_with_scores.json"
+dst = "../quality-api/src/main/resources/quality_report.json"  # adjust this if your Java project path is different
+
+# Ensure the destination folder exists
+os.makedirs(os.path.dirname(dst), exist_ok=True)
+
+# Copy the file
+try:
+    shutil.copy(src, dst)
+    print(f"Copied report to {dst}")
+except Exception as e:
+    print(f"Could not copy file: {e}")

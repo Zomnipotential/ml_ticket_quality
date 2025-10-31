@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.zomnipotential.qualityapi.QualityApiApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.225 s -- in com.zomnipotential.qualityapi.QualityApiApplicationTests
