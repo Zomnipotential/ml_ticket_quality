@@ -5,3 +5,4 @@ __pycache__/
 .ipynb_checkpoints/
 java_quality_project/
 .venv/
+.DS_Store
