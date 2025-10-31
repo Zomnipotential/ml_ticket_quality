@@ -1,40 +1,93 @@
-1. Data Parsing
+**README**
 
-* The raw data from snippet.txt was parsed by detecting ticket_id as a marker and splitting ticket sections accordingly.
-* Timestamps, channel, language hint, and message body were extracted using regex and structured into dictionaries.
+**This project analyzes Swedish customer support tickets. It extracts structured information, calculates quality scores, redacts personal data, and serves the results through a REST API. It consists of two parts:**
 
-2. Entity Extraction
+1. **A Python script that processes the tickets and generates JSON reports.**
+2. **A Java Spring Boot application that serves the processed data via a REST endpoint.**
 
-* The body text was analyzed using regular expressions to extract:
-  * customer_id (e.g., Kundnr 77821)
-  * error_code (e.g., Felkod 504)
-  * office_city (e.g., Malmö-kontoret)
-  * action keywords (e.g., exporterar, synkar)
-  * PII: personnummer, phone, email
+## 1. Project Structure
 
-3. PII Validation Checks
+**Python part:**
 
-* Swedish SSNs (personnummer) were validated using the Luhn algorithm, which verifies the checksum of the final digit.
-* Phone numbers were validated with a simplified E.164 format regex, ensuring they begin with +46 and contain valid digits/spaces.
+* **Input file is located in the **data** folder.**
+* **Output is saved in the **output** folder.**
+* **All processing logic is inside the **src** folder.**
+* **The main script is called **main.py**.**
 
-* Quality Score Calculation
-  Each ticket received a quality_score (0–1), composed of:
+**Java part:**
 
-- Completeness: Percentage of extracted entities filled
-- Consistency: Validity of the timestamp format (ISO 8601)
-- Validity: Format checks on PII (SSN and phone)
-- Privacy: Score penalized if PII is found (for GDPR safety)
-- Language Match: Based on keywords in body vs lang_hint (sv or en)
+* **The Java backend is located in the **quality-api** or **java_quality_project** folder.**
+* **The backend reads a JSON file called **quality_report.json** from the **src/main/resources** directory.**
 
-5. Redaction
+## 2. Running the Python Script
 
-* SSNs, phone numbers, and emails were replaced using regex substitution with:
-* [REDACTED SSN]
-* [REDACTED PHONE]
-* [REDACTED EMAIL]
+1. **Activate your Python virtual environment.**
 
-6. Output
+% source .venv/bin/activate
 
-* Two final JSON files:
-  * ticket_report_with_scores.json (entities + scores)
-  * ticket_report_redacted.json (includes redacted body)
+2. **From the root of the Python project, run the following command:**
+
+% python main.py
+
+**This will:**
+
+* **Load input from:**
+
+data/snippet.txt
+
+* **Parse and clean ticket messages.**
+* **Extract entities like customer ID, error code, action, and personal data.**
+* **Compute quality scores (completeness, consistency, validity, privacy, language match).**
+* **Redact any detected PII such as personnummer, phone numbers, and email addresses.**
+* **Generate two output files:**
+
+output/ticket_report_with_scores.json
+
+output/ticket_report_redacted.json
+
+* **Automatically copy the scored file to the Java backend as:**
+
+../java_quality_project/src/main/resources/quality_report.json
+
+**If your Java project has a different path, update this destination inside **main.py**.**
+
+## 3. Running the Java REST API
+
+1. **Ensure the file **quality_report.json** is present in:**
+
+src/main/resources
+
+2. **Open a terminal inside the Java project folder.**
+3. **Start the Spring Boot application using Maven:**
+
+% mvn spring-boot:run
+
+4. **Once running, open your browser or API testing tool and go to:**
+
+http://localhost:8080/v1/quality/summary
+
+**This will return the full processed ticket report as JSON.**
+
+## 4. Automated Bridge Between Python and Java
+
+**After execution, the Python script copies the latest report directly into the Java backend directory:**
+
+* **Source:**
+
+output/ticket_report_with_scores.json
+
+* **Destination:**
+
+src/main/resources/quality_report.json
+
+**This way, the Java backend always serves the most recent ticket data. No manual steps are required unless your folder names differ.**
+
+## 5. Privacy and Redaction
+
+**The Python script detects and redacts the following personal information from the ticket body:**
+
+* **Swedish personal identity numbers (personnummer)**
+* **Phone numbers**
+* **Email addresses**
+
+**A redacted version is saved separately and intended for safe sharing. Only cleaned data is exposed via the API. The original input is not stored long-term.**
