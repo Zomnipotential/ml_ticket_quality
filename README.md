@@ -5,6 +5,36 @@
 1. **A Python script that processes the tickets and generates JSON reports.**
 2. **A Java Spring Boot application that serves the processed data via a REST endpoint.**
 
+
+**Sure! Here’s a clear and concise **summary section** you can add to the very top of your **README.md**. It gives a step-by-step overview of what to run and in what order — like a quick-start guide.**
+
+## Summary
+
+1. **Activate the Python virtual environment from inside ml_ticket_quality**
+
+% source .venv/bin/activate
+
+2. **Run the Python processing script**
+
+% python main.py
+
+This will generate ticket reports, redact sensitive data, and copy the scored report to the Java project folder.
+
+3. **Navigate to the Java project directory**
+
+% cd ../quality-api
+
+4. **Start the Spring Boot server**
+
+% mvn spring-boot:run
+
+5. **Access the API**
+   **Open a browser or tool like Postman and go to:**
+
+http://localhost:8080/v1/quality/summary
+
+This returns the structured ticket report as JSON.
+
 ## 1. Project Structure
 
 **Python part:**
